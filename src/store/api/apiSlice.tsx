@@ -1,13 +1,21 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  BaseQueryFn,
+  FetchArgs,
+  createApi,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 import {
   logout,
   setCredentials,
   setCurrentUser,
 } from "../features/auth/authSlice";
 import { getRefresh, getDecryptedRefresh } from "../../lib/cryptography";
-
 import { RootState } from "../store";
-console.log("base url : ", process.env.BASE_URL);
+
+interface CustomError {
+  message: string;
+  status: number;
+}
 
 // create base query with authentication
 const baseQuery = fetchBaseQuery({
@@ -24,8 +32,8 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReAuth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  
-  if ((result.data as any)?.status === 401) {
+
+  if (result.error?.status === 401) {
     const refresh = await getDecryptedRefresh();
 
     if (refresh) {

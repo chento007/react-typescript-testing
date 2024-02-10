@@ -13,28 +13,47 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ErrorData } from "../@types/error";
 
+export interface SerializedError {
+  name?: string;
+  message?: string;
+  stack?: string;
+  code?: string;
+}
+
 export default function FormLogin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [login, { isLoading, isSuccess, isError, error }] = useLoginMutation();
 
-  if (isError) {
-    toast.error((error as ErrorData).data.message);
+  if (isError && error) {
+    let errorMessage = "Invalid email or password"; // Default message
+    if ("data" in error && error.data) {
+      const data = error.data; // Assuming the error details are in `data`
+      if (typeof data === "object" && "message" in data) {
+        errorMessage = data.message as string;
+      } else if (typeof data === "string") {
+        errorMessage = data;
+      }
+    } else if ("error" in error && typeof error.error === "string") {
+      // Fallback if the error information is directly in the `error` property
+      errorMessage = error.error;
+    }
+    toast.error(errorMessage);
   }
-  
-  if (isSuccess) {
-    toast.success("Login Success");
-  }
-  const handleSubmit = async ({ email, password }) => {
-    
-    const response = await login({
-      email,
-      password,
-    }).unwrap();
 
-    dispatch(setCredentials(response.data));
-    navigate("/", { replace: true });
+  const handleSubmit = async ({ email, password }) => {
+    try {
+      const {data} = await login({
+        email,
+        password,
+      }).unwrap();
+
+      dispatch(setCredentials(data));
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error("Invalid email or password");
+    }
   };
 
   // validate password with formik

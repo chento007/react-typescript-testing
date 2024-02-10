@@ -8,6 +8,7 @@ import CardProduct from "./CardProduct";
 
 
 export default function HomePageIndex() {
+  
   // get currect user
   const { data: user, isLoading, isError } = useGetUserQuery(undefined);
 
