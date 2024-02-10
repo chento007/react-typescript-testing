@@ -10,6 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
+          
           {/* for public route without login */}
           <Route path="login" element={<LoginPages />} />
           <Route path="*" element={<NoPage />} />
@@ -18,7 +19,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route index element={<HomePage />} />
           </Route>
-          
+
         </Route>
       </Routes>
     </BrowserRouter>

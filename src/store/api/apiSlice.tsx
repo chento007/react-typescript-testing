@@ -26,8 +26,8 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
   if ((result.data as any).status === 401) {
+
     const refresh = await getDecryptedRefresh();
-    console.log("refresh token : ", refresh);
 
     if (refresh) {
       try {
@@ -71,6 +71,6 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
 // create api slice with custom base query
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReAuth,
-  tagTypes: ["User","Product"], // tagTypes are used for cache invalidation
+  tagTypes: ["User", "Product"], // tagTypes are used for cache invalidation
   endpoints: (builder) => ({}),
 });
