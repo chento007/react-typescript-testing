@@ -34,6 +34,7 @@ export default function HomePage() {
 
   return (
     <>
+
       <HomePageIndex />
     </>
   );

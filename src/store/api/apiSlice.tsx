@@ -24,9 +24,8 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReAuth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-
-  if ((result.data as any).status === 401) {
-
+  
+  if ((result.data as any)?.status === 401) {
     const refresh = await getDecryptedRefresh();
 
     if (refresh) {
@@ -40,7 +39,6 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
           api,
           extraOptions
         );
-        console.log("result from refresh : ", refreshResult);
 
         // Check if the refresh was successful
         if ((refreshResult?.data as any).data) {
