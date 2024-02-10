@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { useGetUserQuery } from "../store/features/user/userApiSlice";
 import LoadingComponent from "./LoadingComponent";
 import { useLocation } from "react-router-dom";
+import { logout } from "../store/features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 export default function NavBar() {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   // get currect user
   const { data: user, isLoading, isError } = useGetUserQuery(undefined);
@@ -29,6 +32,9 @@ export default function NavBar() {
               <>
                 <Link
                   to="/login"
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Logout
