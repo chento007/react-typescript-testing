@@ -5,6 +5,7 @@ import CardProduct from "../components/Home/CardProduct";
 import UserProfile from "../components/UserProfile";
 import { ProductType } from "../@types/product";
 import LoadingComponent from "../components/LoadingComponent";
+import HomePageIndex from "../components/Home";
 
 export default function HomePage() {
   // get currect user
@@ -33,20 +34,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/* just display user */}
-      <UserProfile email={user?.data?.email} username={""} />
-
-      {/* list all product */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-screen-xl px-32">
-        {products?.data.map((item: ProductType, index: number) => (
-          <CardProduct
-            description={item?.description}
-            photo={item?.photo}
-            title={item?.title}
-            key={index}
-          />
-        ))}
-      </div>
+      <HomePageIndex />
     </>
   );
 }
