@@ -18,6 +18,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route index element={<HomePage />} />
           </Route>
+          
         </Route>
       </Routes>
     </BrowserRouter>
