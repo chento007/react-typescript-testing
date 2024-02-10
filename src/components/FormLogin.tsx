@@ -44,13 +44,14 @@ export default function FormLogin() {
 
   const handleSubmit = async ({ email, password }) => {
     try {
-      const {data} = await login({
+      const { data } = await login({
         email,
         password,
       }).unwrap();
 
       dispatch(setCredentials(data));
-      navigate("/", { replace: true });
+
+      navigate("/");
     } catch (error) {
       console.error("Invalid email or password");
     }
