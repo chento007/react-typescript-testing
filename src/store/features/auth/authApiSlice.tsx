@@ -1,5 +1,5 @@
 // this the extended slice for auth
-import { apiSlice } from "../../api/apiSlice"
+import { apiSlice } from "../../api/apiSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,7 +11,15 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+
+    register: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: { ...credentials },
+      }),
+    }),
   }),
 });
 // auto generated hooks for login mutation
-export const { useLoginMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation } = authApiSlice;

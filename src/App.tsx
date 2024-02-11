@@ -4,6 +4,7 @@ import Layout from "./Layout";
 import HomePage from "./pages/HomePage";
 import LoginPages from "./pages/LoginPages";
 import RequireAuth from "./store/features/auth/RequireAuth";
+import SignUpPage from "./pages/SignUpPage";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           
           {/* for public route without login */}
-          <Route path="login" element={<LoginPages />} />
+          <Route path="auth/login" element={<LoginPages />} />
+          <Route path="auth/signup" element={<SignUpPage />} />
           <Route path="*" element={<NoPage />} />
 
           {/* protect route  */}

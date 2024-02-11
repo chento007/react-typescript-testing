@@ -1,6 +1,6 @@
-export interface ErrorData {
+export interface ErrorType {
     data: {
-        message: string;
-        stauts: number;
-    }
+        message?: string;
+        status?: number;
+    };
 }

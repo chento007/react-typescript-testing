@@ -1,9 +1,8 @@
-import FormLogin from "../components/FormLogin";
+import FormLogin from "../components/Auth/FormLogin";
 
 export default function LoginPages() {
-
   return (
-    <div className="p-36">
+    <div className="mt-36">
       <FormLogin />
     </div>
   );
