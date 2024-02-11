@@ -13,8 +13,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           
           {/* for public route without login */}
-          <Route path="auth/login" element={<LoginPages />} />
-          <Route path="auth/signup" element={<SignUpPage />} />
+          <Route path="/auth/login" element={<LoginPages />} />
+          <Route path="/auth/signup" element={<SignUpPage />} />
           <Route path="*" element={<NoPage />} />
 
           {/* protect route  */}

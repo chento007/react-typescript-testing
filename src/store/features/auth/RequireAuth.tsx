@@ -5,26 +5,11 @@ import { useGetUserQuery } from "../user/userApiSlice";
 import LoadingComponent from "../../../components/LoadingComponent";
 
 const RequireAuth = () => {
-  const token = useSelector(selectCurrentAccessToken);
 
-  const {
-    data: user,
-    isLoading,
-    isSuccess: isSuccessGetUser,
-    isError,
-    error,
-  } = useGetUserQuery(undefined);
+  const token = useSelector(selectCurrentAccessToken);
   const location = useLocation();
 
-  if (isLoading) {
-    return (
-      <>
-        <LoadingComponent />
-      </>
-    );
-  }
-
-  return user ? (
+  return location ? (
     <Outlet />
   ) : (
     <Navigate to="/auth/login" state={{ from: location }} replace />
