@@ -28,11 +28,6 @@ export default function HomePageIndex() {
     );
   }
 
-  // when something error
-  if (isError || isProductError) {
-    return <h1>Error...</h1>;
-  }
-
   return (
     <>
       {/* just display user */}

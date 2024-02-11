@@ -3,7 +3,6 @@ import {
   useRegisterMutation,
 } from "../../store/features/auth/authApiSlice";
 import {
-  isAuthenticated,
   setCredentials,
 } from "../../store/features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
