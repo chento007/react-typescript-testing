@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import { NextUIProvider } from "@nextui-org/react";
 
 // Find the element to attach the React app
 const container = document.getElementById("root");
@@ -14,11 +15,13 @@ if (container !== null) {
 
   root.render(
     <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <NextUIProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </NextUIProvider>
     </React.StrictMode>
   );
 } else {
-  console.error('Failed to find the root element');
+  console.error("Failed to find the root element");
 }

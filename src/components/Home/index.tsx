@@ -5,10 +5,9 @@ import LoadingComponent from "../LoadingComponent";
 import UserProfile from "../UserProfile";
 import { ProductType } from "../../@types/product";
 import CardProduct from "./CardProduct";
-
+import ModalAddNewProduct from "./ModalAddNewProduct";
 
 export default function HomePageIndex() {
-  
   // get currect user
   const { data: user, isLoading, isError } = useGetUserQuery(undefined);
 
@@ -33,10 +32,18 @@ export default function HomePageIndex() {
       {/* just display user */}
       <UserProfile email={user?.data?.email} username={""} />
 
+      {/* create product */}
+      <div className="max-w-screen-xl px-32">
+        <ModalAddNewProduct />
+      </div>
+
       {/* list all product */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-screen-xl px-32">
+      <div className="grid grid-cols-5 md:grid-cols-5 gap-4 max-w-screen-xl pl-32">
         {products?.data.map((item: ProductType, index: number) => (
           <CardProduct
+            id={item.id}
+            price={item.price}
+            user={item.user}
             description={item?.description}
             photo={item?.photo}
             title={item?.title}
