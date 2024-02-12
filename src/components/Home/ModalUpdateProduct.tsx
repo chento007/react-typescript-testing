@@ -51,7 +51,7 @@ export default function ModalUpdateProduct(props: ProductType) {
         data,
       }).unwrap();
 
-      onOpenChange()
+      onOpenChange();
       console.log(response);
 
       // Show success toast immediately
@@ -90,7 +90,7 @@ export default function ModalUpdateProduct(props: ProductType) {
                       price: props.price,
                       id: props.id,
                       user: props.user,
-                      photo: props.photo
+                      photo: props.photo,
                     }}
                     validationSchema={validationSchema}
                     onSubmit={(values, { setSubmitting, resetForm }) => {
