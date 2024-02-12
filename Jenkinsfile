@@ -9,6 +9,7 @@ pipeline {
         stage("Build Image") {
             steps {
                 echo '==============build version============='
+                sh 'yes | docker system prune -a'
                 sh 'docker-compose up -d --build'
             }
         }
