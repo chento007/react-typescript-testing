@@ -1,7 +1,5 @@
 import { useLoginMutation } from "../../store/features/auth/authApiSlice";
-import {
-  setCredentials,
-} from "../../store/features/auth/authSlice";
+import { setCredentials } from "../../store/features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
@@ -158,6 +156,13 @@ export default function FormLogin() {
                 />
               </div>
 
+              {/* route to register */}
+              <div className="my-6 text-center">
+                <span>
+                  You don't have an account yet?{" "}
+                  <Link to={"/auth/signup"} className="text-blue-600">Register here</Link>
+                </span>
+              </div>
               {/* Submit */}
               <div className="relative z-0 w-full mb-6 group flex justify-center">
                 <button

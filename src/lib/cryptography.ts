@@ -92,6 +92,35 @@ export async function getDecryptedRefresh() {
     }
 }
 
+export  function getDecryptedRefreshAuth() {
+    
+    try {
+        const encryptedRefresh = getRefresh();
+        if (!encryptedRefresh) {
+            console.error("Encrypted refresh token is empty.");
+            return null;
+        }
+        if (!process.env.REACT_APP_SECRET_KEY) {
+            console.error("Secret key is undefined.");
+            return null;
+        }
+
+        const decryptedRefresh = decrypt(
+            encryptedRefresh,
+            process.env.REACT_APP_SECRET_KEY
+        );
+
+        if (!decryptedRefresh) {
+            console.error("Decryption failed or returned an empty result.");
+            return null;
+        }
+
+        return decryptedRefresh;
+    } catch (error) {
+        console.error("An error occurred during decryption:", error);
+        return null;
+    }
+}
 
 export function getRefresh() {
     const refresh = secureLocalStorage.getItem(

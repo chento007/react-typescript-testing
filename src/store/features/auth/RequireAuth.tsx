@@ -1,13 +1,12 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectCurrentAccessToken } from "./authSlice";
+import {getDecryptedRefreshAuth } from "../../../lib/cryptography";
 
 const RequireAuth = () => {
 
-  const token = useSelector(selectCurrentAccessToken);
   const location = useLocation();
+  const refresh = getDecryptedRefreshAuth();
 
-  return token ? (
+  return refresh ? (
     <Outlet />
   ) : (
     <Navigate to="/auth/login" state={{ from: location }} replace />
