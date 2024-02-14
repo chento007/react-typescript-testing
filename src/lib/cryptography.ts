@@ -4,6 +4,8 @@ import CryptoJS from "crypto-js";
 // for secure local storage
 import secureLocalStorage from "react-secure-storage";
 
+
+
 // encrypt refresh token
 export function encrypt(message: string, secretKey: string) {
     let ciphertext = null;
@@ -63,7 +65,7 @@ export function decrypt(ciphertext, secretKey) {
 
 
 export async function getDecryptedRefresh() {
-    
+
     try {
         const encryptedRefresh = getRefresh();
         if (!encryptedRefresh) {
@@ -92,8 +94,8 @@ export async function getDecryptedRefresh() {
     }
 }
 
-export  function getDecryptedRefreshAuth() {
-    
+export function getDecryptedRefreshAuth() {
+
     try {
         const encryptedRefresh = getRefresh();
         if (!encryptedRefresh) {
