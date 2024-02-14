@@ -19,7 +19,7 @@ pipeline {
                 echo '==============build version============='
                 sh 'yes | docker system prune -a'
                 sh 'docker-compose up -d --build'
-                sh "curl -s -X POST https://api.telegram.org/bot6811807545:AAGl9wT-cF8niS_JsvqupVcctSliKqoYI4g/sendMessage -d chat_id=-4138686370 -d text='hello'" 
+                sh "curl -s -X POST https://api.telegram.org/bot6811807545:AAGl9wT-cF8niS_JsvqupVcctSliKqoYI4g/sendMessage -d chat_id=-4138686370 -d text='url deploy : http://35.185.181.230:8083/ '"
             }
         }
     }
