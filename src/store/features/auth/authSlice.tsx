@@ -16,6 +16,9 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action) => {
+
+      console.log(action.payload);
+      
       state.access = action.payload.access;
       state.isAuthenticated = true;
       secureRefresh(action.payload.refresh);

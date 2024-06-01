@@ -19,7 +19,7 @@ interface CustomError {
 
 // create base query with authentication
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.REACT_APP_ENVIRONMENT,
+  baseUrl: "https://localhost:3001/api",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.access;
     headers.set("content-type", "application/json");
@@ -33,7 +33,8 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReAuth = async (args, api, extraOptions) => {
   
   let result = await baseQuery(args, api, extraOptions);
-
+  console.log("result respone : ",result);
+  
   if (result.error?.status === 401) {
     const refresh = await getDecryptedRefresh();
 
@@ -72,12 +73,13 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
       console.error("Session expired. Please log in again. 2");
     }
   }
+
   return result;
 };
 
 // create api slice with custom base query
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReAuth,
-  tagTypes: ["User", "Product"], // tagTypes are used for cache invalidation
+  tagTypes: ["User", "Product","Auth"], // tagTypes are used for cache invalidation
   endpoints: (builder) => ({}),
 });

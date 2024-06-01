@@ -1,33 +1,41 @@
-# # Fetching the minified node image on apline linux
-# FROM node:16.18.1
+# Fetching the minified node image on Alpine Linux
+FROM node:16.18.1 as REACT_BUILD
 
-# # Declaring env
-# ENV NODE_ENV development
-
-# # Setting up the work directory
-# WORKDIR /express-docker
-
-# # Copying all the files in our project
-# COPY . .
-
-# # Installing dependencies
-# RUN npm install
-
-# # Starting our application
-# CMD ["npm", "start"]
-
-# # Exposing server port
-# EXPOSE 3000
-
-# Stage 1: Build the React app
-FROM node:16.18.1 as builder
+# Setting up the work directory
 WORKDIR /app
+
 COPY package*.json ./
-RUN npm i
+
+# Installing dependencies
+RUN npm install
+
+# Copying all the files in our project
 COPY . .
+
+# Building the React app
 RUN npm run build
-# Stage 2: Create the production image
-FROM nginx:latest
-COPY --from=builder /app/build /usr/share/nginx/html
+
+FROM nginx:alpine
+
+# Create the SSL directory
+RUN mkdir -p /etc/nginx/ssl
+
+# Remove default nginx website
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy our default nginx config
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+# Copy SSL certificates
+COPY ./my-local-domain.test.pem /etc/nginx/ssl/my-local-domain.test.pem
+COPY ./my-local-domain.test-key.pem /etc/nginx/ssl/my-local-domain.test-key.pem
+
+# Copy built React app to nginx html directory
+COPY --from=REACT_BUILD /app/build /usr/share/nginx/html
+
+# Expose ports
 EXPOSE 80
+EXPOSE 443
+
+# Run nginx
 CMD ["nginx", "-g", "daemon off;"]

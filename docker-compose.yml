@@ -1,6 +1,5 @@
 version: "3.8"
 services:
-  
   online-shop:
     image: front-end-online-shop-image
     container_name: front-end-online-shop-container
@@ -9,12 +8,5 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8083:3000"
-
-
-
-
-
-
-
-
+      - "8083:80"  # Map host port 8083 to container port 80
+      - "8443:443"  # Map host port 8443 to container port 443 for HTTPS

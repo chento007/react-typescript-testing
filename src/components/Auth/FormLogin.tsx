@@ -52,8 +52,11 @@ export default function FormLogin() {
         email,
         password,
       }).unwrap();
-      if (response.data) {
-        dispatch(setCredentials(response.data));
+
+      console.log("respone: ",response);
+      
+      if (response) {
+        dispatch(setCredentials(response));
         navigate("/", { replace: true });
       }
     } catch (error: any) {
