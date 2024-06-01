@@ -26,10 +26,6 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy our default nginx config
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Copy SSL certificates
-COPY ./my-local-domain.test.pem /etc/nginx/ssl/my-local-domain.test.pem
-COPY ./my-local-domain.test-key.pem /etc/nginx/ssl/my-local-domain.test-key.pem
-
 # Copy built React app to nginx html directory
 COPY --from=REACT_BUILD /app/build /usr/share/nginx/html
 
